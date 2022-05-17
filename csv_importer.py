@@ -70,6 +70,8 @@ with open('coordiante.txt', 'x') as r:
     r.write('\n'.join(str(item) for item in newDiagram) + '\n')    
     
 plt.scatter(xData, yData)
+plt.xlabel('Latitude')
+plt.ylabel('Longtitude')
 plt.xlim(32,37)
 plt.ylim([-100,-80])
 plt.show()
