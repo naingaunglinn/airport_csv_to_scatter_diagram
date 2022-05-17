@@ -3,7 +3,6 @@ import re
 
 filePath = input("Pleae enter your file path: ")
 with open(filePath, 'r') as f:
-    results = []
     dataArray = []
     dataDiagram = []
     colData_1 = ''
@@ -18,9 +17,7 @@ with open(filePath, 'r') as f:
     yData = []
     for line in f:
         line = re.sub(r'(?!(([^"]*"){2})*[^"]*$),', '|', line)
-        print(line)
         words = line.split(',')
-        results.append(words)
         # print (words[1])
         
         for i in range(len(words)):
@@ -36,7 +33,7 @@ with open(filePath, 'r') as f:
                 cityItem = i
                 # break
             if words[cityItem] != 'iata' and words[cityItem] != 'city':
-                colData_2 = words[cityItem]
+                colData_2 = words[cityItem].replace('|', ',')
                 
         for i in range(len(words)):
             if words[i] == 'lat':
@@ -63,12 +60,8 @@ with open(filePath, 'r') as f:
                     dataDiagram.append((colData_1,colData_2,colData_3,colData_4))
                     break
                 
-                              
-                
     newData = list(dict.fromkeys(dataArray))  
-    newDiagram = list(dict.fromkeys(dataDiagram))   
-    print(xData)       
-    print(yData)    
+    newDiagram = list(dict.fromkeys(dataDiagram))
     
 with open('airport-data.txt', 'x') as w:
     w.write('\n'.join(str(item) for item in newData) + '\n')
