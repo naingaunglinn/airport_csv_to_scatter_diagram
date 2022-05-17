@@ -1,4 +1,6 @@
-with open('airports.csv', 'r') as f:
+filePath = input("Pleae enter your file path: ")
+
+with open(filePath, 'r') as f:
     results = []
     dataArray = []
     dataDiagram = []
