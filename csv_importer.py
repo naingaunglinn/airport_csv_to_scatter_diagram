@@ -1,5 +1,7 @@
-filePath = input("Pleae enter your file path: ")
+import matplotlib.pyplot as plt
+import re
 
+filePath = input("Pleae enter your file path: ")
 with open(filePath, 'r') as f:
     results = []
     dataArray = []
@@ -12,8 +14,11 @@ with open(filePath, 'r') as f:
     cityItem = 0
     latItem = 0
     longItem = 0
-    
+    xData = []
+    yData = []
     for line in f:
+        line = re.sub(r'(?!(([^"]*"){2})*[^"]*$),', '|', line)
+        print(line)
         words = line.split(',')
         results.append(words)
         # print (words[1])
@@ -25,7 +30,7 @@ with open(filePath, 'r') as f:
                 # break
             if words[airportItem] != 'iata' and words[airportItem] != 'airport':
                 colData_1 = words[airportItem].replace('|', ',')
-        
+                
         for i in range(len(words)):
             if words[i] == 'city':
                 cityItem = i
@@ -48,14 +53,13 @@ with open(filePath, 'r') as f:
             if words[longItem] != 'iata' and words[longItem] != 'long' and words[longItem] != 'long\n':
                 colData_4 = words[longItem]
                 colData_4 = colData_4.replace('\n','')
-                if colData_3 == 'USA':
-                    print (colData_3, latItem, words)
-                    break;    
                 dataArray.append((colData_1,colData_2,colData_3,colData_4)) 
                 
                 latFloat = float(colData_3) 
                 longFloat = float(colData_4)
                 if((latFloat >= 32 and latFloat <= 37) and (longFloat >= -100 and longFloat <= -80) ):
+                    xData.append(latFloat)
+                    yData.append(longFloat)
                     dataDiagram.append((colData_1,colData_2,colData_3,colData_4))
                     break
                 
@@ -63,8 +67,8 @@ with open(filePath, 'r') as f:
                 
     newData = list(dict.fromkeys(dataArray))  
     newDiagram = list(dict.fromkeys(dataDiagram))   
-    # print(results)       
-    # print(newData)    
+    print(xData)       
+    print(yData)    
     
 with open('airport-data.txt', 'x') as w:
     w.write('\n'.join(str(item) for item in newData) + '\n')
@@ -72,3 +76,7 @@ with open('airport-data.txt', 'x') as w:
 with open('coordiante.txt', 'x') as r:
     r.write('\n'.join(str(item) for item in newDiagram) + '\n')    
     
+plt.scatter(xData, yData)
+plt.xlim(32,37)
+plt.ylim([-100,-80])
+plt.show()
