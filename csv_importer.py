@@ -1,5 +1,4 @@
 import matplotlib.pyplot as plt
-import re
 
 filePath = input("Pleae enter your file path: ")
 with open(filePath, 'r') as f:
@@ -16,8 +15,8 @@ with open(filePath, 'r') as f:
     xData = []
     yData = []
     for line in f:
-        line = re.sub(r'(?!(([^"]*"){2})*[^"]*$),', '|', line)
-        words = line.split(',')
+        words = line.split(',(?=")')
+        words = words[0].split(',(?=")')
         # print (words[1])
         
         for i in range(len(words)):
