@@ -92,13 +92,13 @@ with open(filePath, 'r') as f:
     newDiagram = list(dict.fromkeys(dataDiagram))
     totalData = str(len(dataDiagram) - 1)
     print(totalData)
-# #All row file create     
-# with open('airport-data.txt', 'x') as w:
-#     w.write('\n'.join(str(item) for item in newData) + '\n')
+#All row file create     
+with open('airport-data.txt', 'x') as w:
+    w.write('\n'.join(str(item) for item in newData) + '\n')
     
-# #All row within coordinate data validation    
-# with open('coordiante.txt', 'x') as r:
-#     r.write('\n'.join(str(item) for item in newDiagram) + '\n')    
+#All row within coordinate data validation    
+with open('coordiante.txt', 'x') as r:
+    r.write('\n'.join(str(item) for item in newDiagram) + '\n')    
 
 #Scatter diagram layout    
 plt.scatter(xData, yData)
