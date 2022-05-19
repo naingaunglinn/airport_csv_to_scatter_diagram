@@ -64,7 +64,7 @@ with open(filePath, 'r') as f:
         
         # Retrive the required column longtude
         for i in range(len(words)):
-            if words[i] == 'long\n':
+            if words[latItem] != 'iata' and words[i] == 'long\n':
                 longItem = i
                 break
             colData_4 = words[longItem]
