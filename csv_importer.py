@@ -90,17 +90,19 @@ with open(filePath, 'r') as f:
     #Retrive the array data to text loop
     newData = list(dict.fromkeys(dataArray))  
     newDiagram = list(dict.fromkeys(dataDiagram))
+    totalData = str(len(dataDiagram) - 1)
+    print(totalData)
+# #All row file create     
+# with open('airport-data.txt', 'x') as w:
+#     w.write('\n'.join(str(item) for item in newData) + '\n')
     
-#All row file create     
-with open('airport-data.txt', 'x') as w:
-    w.write('\n'.join(str(item) for item in newData) + '\n')
-    
-#All row within coordinate data validation    
-with open('coordiante.txt', 'x') as r:
-    r.write('\n'.join(str(item) for item in newDiagram) + '\n')    
+# #All row within coordinate data validation    
+# with open('coordiante.txt', 'x') as r:
+#     r.write('\n'.join(str(item) for item in newDiagram) + '\n')    
 
 #Scatter diagram layout    
 plt.scatter(xData, yData)
+plt.title("Total Number of airports are " + totalData)
 plt.xlabel('Latitude')
 plt.ylabel('Longtitude')
 plt.xlim(32,37)
